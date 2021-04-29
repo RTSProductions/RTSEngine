@@ -38,6 +38,39 @@ namespace RTSEngine.RTSEngine
             RTSEngine.RegisterSprite(this);
         }
 
+        public bool IsColliding(Sprite2D a, Sprite2D b)
+        {
+           if (a.Position.x < b.Position.x + b.Scale.x &&
+                a.Position.x + a.Scale.x > b.Position.x &&
+                a.Position.y < b.Position.y + b.Scale.y &&
+                a.Position.y + a.Scale.y > b.Position.y)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsColliding(string Tag)
+        {
+            foreach(Sprite2D b in RTSEngine.AllSprites)
+            {
+                if (b.Tag == Tag)
+                {
+                    if (Position.x < b.Position.x + b.Scale.x &&
+                         Position.x + Scale.x > b.Position.x &&
+                         Position.y < b.Position.y + b.Scale.y &&
+                         Position.y + Scale.y > b.Position.y)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+
+            return false;
+        }
+
         public void DestroySelf()
         {
             Log.Info($"[SHAPE2D]({Tag}) - Has Been destroyed!");

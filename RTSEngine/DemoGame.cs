@@ -17,6 +17,7 @@ namespace RTSEngine
         bool right;
         bool up;
         bool down;
+        Vector2 lastPos = Vector2.Zero();
 
         string[,] Map =
         {
@@ -48,7 +49,7 @@ namespace RTSEngine
                 }
             }
 
-            player = new Sprite2D(new Vector2(30, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+            player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
         }
 
         public override void OnDraw()
@@ -75,6 +76,16 @@ namespace RTSEngine
             if (right)
             {
                 player.Position.x += 1f;
+            }
+            if (player.IsColliding("Ground"))
+            {
+               player.Position.x = lastPos.x;
+               player.Position.y = lastPos.y;
+            }
+            else
+            {
+                lastPos.x = player.Position.x;
+                lastPos.y = player.Position.y;
             }
 
         }

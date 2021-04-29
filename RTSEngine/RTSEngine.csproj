@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,7 +68,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /I /E $(ProjectDir)Assets $(TargetDir)\Assets
+    <PostBuildEvent>xcopy /Y /I /E $(ProjectDir)Assets $(TargetDir)Assets
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

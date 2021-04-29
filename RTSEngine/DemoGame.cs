@@ -5,12 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using RTSEngine.RTSEngine;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace RTSEngine
 {
     class DemoGame : RTSEngine.RTSEngine
     {
-        public Shape2D player = null;
+        Sprite2D player = null;
+
+        bool left;
+        bool right;
+        bool up;
+        bool down;
+
+        string[,] Map =
+        {
+            {"g","g","g","g","g","g","g"},
+            {"g",".",".",".",".",".","g"},
+            {"g",".",".",".","g",".","g"},
+            {"g",".","g","g","g",".","g"},
+            {"g",".","g",".","g",".","g"},
+            {"g",".","g",".",".",".","g"},
+            {"g","g","g","g","g","g","g"},
+        };
         public DemoGame() : base(new Vector2(615, 515), "RTS Engine Demo")
         {
 
@@ -18,8 +35,20 @@ namespace RTSEngine
         public override void OnLoad()
         {
             BackroundColor = Color.Black;
+            CameraPosition.x = 100;
 
-            player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "Test", Color.Red);
+            for (int i = 0; i < Map.GetLength(1); i++)
+            {
+                for (int j = 0; j  < Map.GetLength(0); j ++)
+                {
+                    if (Map[j, i] == "g")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
+                    }
+                }
+            }
+
+            player = new Sprite2D(new Vector2(30, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
         }
 
         public override void OnDraw()
@@ -31,6 +60,39 @@ namespace RTSEngine
         public override void OnUpdate()
         {
             time++;
+            if (up)
+            {
+                player.Position.y  -= 1f;
+            }
+            if (down)
+            {
+                player.Position.y += 1f;
+            }
+            if (left)
+            {
+                player.Position.x -= 1f;
+            }
+            if (right)
+            {
+                player.Position.x += 1f;
+            }
+
+        }
+
+        public override void GetKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = true; }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = true; }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = true; }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = true; }
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = false; }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = false; }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = false; }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = false; }
         }
     }
 }

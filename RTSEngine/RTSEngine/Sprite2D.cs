@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
@@ -13,8 +13,14 @@ namespace RTSEngine.RTSEngine
         public Vector2 Scale = null;
         public string Directory = "";
         public string Tag = "";
-        public Image sprite = null;
-
+        public Bitmap Sprite = null;
+        /// <summary>
+        /// Sets the sacle position tag and immage of the sprite that you are using
+        /// </summary>
+        /// <param name="Position"></param>
+        /// <param name="Scale"></param>
+        /// <param name="Directory"></param>
+        /// <param name="Tag"></param>
         public Sprite2D(Vector2 Position, Vector2 Scale, string Directory, String Tag)
         {
             this.Position = Position;
@@ -22,8 +28,12 @@ namespace RTSEngine.RTSEngine
             this.Tag = Tag;
             this.Directory = Directory;
 
-            Bitmap sprite = new Bitmap((int)this.Scale.x, (int)this.Scale.y, System.Drawing.Imaging.PixelFormat.Alpha);
-            //sprite.
+            Image temp =  Image.FromFile($"Assets/Sprites/PNG/{Directory}.png");
+
+            Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
+
+            this.Sprite = sprite;
+
             Log.Info($"[SHAPE2D]({Tag}) - Has Been registered!");
             RTSEngine.RegisterSprite(this);
         }

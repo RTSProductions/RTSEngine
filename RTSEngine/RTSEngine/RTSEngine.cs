@@ -29,6 +29,9 @@ namespace RTSEngine.RTSEngine
         private static List<Sprite2D> AllSprites = new List<Sprite2D>();
 
         public Color BackroundColor = Color.Aqua;
+
+        public Vector2 CameraPosition = Vector2.Zero();
+        public float CameraAngle = 0f;
         public RTSEngine(Vector2 screenSize, string title)
         {
             Log.Info("Game is starting");
@@ -39,13 +42,26 @@ namespace RTSEngine.RTSEngine
             Window.Size = new Size((int)ScreenSize.x, (int)ScreenSize.y);
             Window.Text = Title;
             Window.Paint += Renderer;
-
+            Window.KeyDown += Window_KeyDown;
+            Window.KeyUp += Window_KeyUp;
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
             
 
             Application.Run(Window);
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            GetKeyDown(e);
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            GetKeyUp(e);
+        }
+
+
 
         void GameLoop()
         {
@@ -107,11 +123,20 @@ namespace RTSEngine.RTSEngine
             Graphics g = e.Graphics;
             g.Clear(BackroundColor);
 
+            g.TranslateTransform(CameraPosition.x, CameraPosition.y);
+            g.RotateTransform(CameraAngle);
             foreach (Shape2D shape in AllShapes)
             {
                 g.FillRectangle(new SolidBrush(shape.color), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
             }
+            foreach (Sprite2D sprite in AllSprites)
+            {
+                g.DrawImage(sprite.Sprite, sprite.Position.x, sprite.Position.y, sprite.Scale.x, sprite.Scale.y);
+            }
 
         }
+        public abstract void GetKeyDown(KeyEventArgs e);
+        public abstract void GetKeyUp(KeyEventArgs e);
+
     }
 }

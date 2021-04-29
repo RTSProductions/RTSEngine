@@ -20,8 +20,6 @@ namespace RTSEngine
             BackroundColor = Color.Black;
 
             player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "Test");
-
-            Console.WriteLine("hello");
         }
 
         public override void OnDraw()

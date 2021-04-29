@@ -64,4 +64,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /I /E $(ProjectDir)Assets $(TargetDir)\Assets
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

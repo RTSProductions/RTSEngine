@@ -19,17 +19,18 @@ namespace RTSEngine
         {
             BackroundColor = Color.Black;
 
-            player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "Test");
+            player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "Test", Color.Red);
         }
 
         public override void OnDraw()
         {
             
         }
+
         int time = 0;
         public override void OnUpdate()
         {
-            
+            time++;
         }
     }
 }

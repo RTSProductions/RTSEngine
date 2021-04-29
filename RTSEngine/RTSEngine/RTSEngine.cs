@@ -26,6 +26,7 @@ namespace RTSEngine.RTSEngine
 
 
         private static List<Shape2D> AllShapes = new List<Shape2D>();
+        private static List<Sprite2D> AllSprites = new List<Sprite2D>();
 
         public Color BackroundColor = Color.Aqua;
         public RTSEngine(Vector2 screenSize, string title)
@@ -77,11 +78,27 @@ namespace RTSEngine.RTSEngine
                 AllShapes.Add(shape);
             }
         }
+
+        public static void RegisterSprite(Sprite2D sprite)
+        {
+            if (!AllSprites.Contains(sprite))
+            {
+                AllSprites.Add(sprite);
+            }
+        }
         public static void UnRegisterShape(Shape2D shape)
         {
             if (AllShapes.Contains(shape))
             {
                 AllShapes.Remove(shape);
+            }
+        }
+
+        public static void UnRegisterSprite(Sprite2D sprite)
+        {
+            if (AllSprites.Contains(sprite))
+            {
+                AllSprites.Remove(sprite);
             }
         }
 
@@ -92,7 +109,7 @@ namespace RTSEngine.RTSEngine
 
             foreach (Shape2D shape in AllShapes)
             {
-                g.FillRectangle(new SolidBrush(Color.Red), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
+                g.FillRectangle(new SolidBrush(shape.color), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
             }
 
         }

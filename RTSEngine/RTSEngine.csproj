@@ -53,6 +53,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RTSEngine\Shape2D.cs" />
+    <Compile Include="RTSEngine\Sprite2D.cs" />
     <Compile Include="RTSEngine\Vector2.cs" />
   </ItemGroup>
   <ItemGroup>

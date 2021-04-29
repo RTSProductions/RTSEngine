@@ -21,12 +21,16 @@ namespace RTSEngine.RTSEngine
     {
         private Vector2 ScreenSize = new Vector2(512, 512);
         private string Title = "New Game";
-        private Canvas Window;
-        private Thread GameLoopThread;
+        private Canvas Window = null;
+        private Thread GameLoopThread = null;
+
+
+        private static List<Shape2D> AllShapes = new List<Shape2D>();
 
         public Color BackroundColor = Color.Aqua;
         public RTSEngine(Vector2 screenSize, string title)
         {
+            Log.Info("Game is starting");
             Title = title;
             ScreenSize = screenSize;
 
@@ -34,7 +38,6 @@ namespace RTSEngine.RTSEngine
             Window.Size = new Size((int)ScreenSize.x, (int)ScreenSize.y);
             Window.Text = Title;
             Window.Paint += Renderer;
-            OnLoad();
 
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
@@ -56,7 +59,7 @@ namespace RTSEngine.RTSEngine
                 }
                 catch
                 {
-                    Console.WriteLine("Game is loading...");
+                    Log.Error("Game has not been found");
                 }
             }
         }
@@ -67,10 +70,30 @@ namespace RTSEngine.RTSEngine
 
         public abstract void OnDraw();
 
+        public static void RegisterShape(Shape2D shape)
+        {
+            if (!AllShapes.Contains(shape))
+            {
+                AllShapes.Add(shape);
+            }
+        }
+        public static void UnRegisterShape(Shape2D shape)
+        {
+            if (AllShapes.Contains(shape))
+            {
+                AllShapes.Remove(shape);
+            }
+        }
+
         private void Renderer (object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.Clear(BackroundColor);
+
+            foreach (Shape2D shape in AllShapes)
+            {
+                g.FillRectangle(new SolidBrush(Color.Red), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
+            }
 
         }
     }

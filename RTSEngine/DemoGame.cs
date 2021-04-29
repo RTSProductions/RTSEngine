@@ -10,6 +10,7 @@ namespace RTSEngine
 {
     class DemoGame : RTSEngine.RTSEngine
     {
+        public Shape2D player = null;
         public DemoGame() : base(new Vector2(615, 515), "RTS Engine Demo")
         {
 
@@ -17,19 +18,20 @@ namespace RTSEngine
         public override void OnLoad()
         {
             BackroundColor = Color.Black;
+
+            player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "Test");
+
+            Console.WriteLine("hello");
         }
 
         public override void OnDraw()
         {
             
         }
-
-
-        int frame = 0;
+        int time = 0;
         public override void OnUpdate()
         {
-            Console.WriteLine("Frame Count:" + frame);
-            frame++;
+            
         }
     }
 }

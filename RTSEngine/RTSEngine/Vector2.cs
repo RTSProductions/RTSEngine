@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RTSEngine.RTSEngine
 {
+    /// <summary>
+    /// A 2D float array that can be used for the rotation, scale, or of corse position of an object
+    /// </summary>
     public class Vector2
     {
         public float x { get; set; }

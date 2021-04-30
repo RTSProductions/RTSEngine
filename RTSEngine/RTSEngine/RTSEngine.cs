@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
+using System.Numerics;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
 
 namespace RTSEngine.RTSEngine
 {
@@ -32,11 +36,28 @@ namespace RTSEngine.RTSEngine
         public static List<Shape2D> AllShapes = new List<Shape2D>();
         public static List<Sprite2D> AllSprites = new List<Sprite2D>();
 
-        public Color BackroundColor = Color.Aqua;
+        public System.Drawing.Color BackroundColor = System.Drawing.Color.Aqua;
 
         public Vector2 CameraPosition = Vector2.Zero();
         public Vector2 CameraZoom = new Vector2(1, 1);
         public float CameraAngle = 0f;
+
+        // Define the size of the world. Simulation will still work
+        // if bodies reach the end of the world, but it will be slower.
+        AABB worldAABB = new AABB
+        {
+            UpperBound = new Vec2(2000, 2000),
+            LowerBound = new Vec2(-2000, -2000)
+        };
+
+        bool doSleep = false;
+
+        // Define the gravity vector.
+         Vec2 gravity = new Vec2(0.0f, -10.0f);
+
+
+        public static World world = null;
+
         public RTSEngine(Vector2 screenSize, string title)
         {
             Log.Info("Game is starting");
@@ -53,7 +74,8 @@ namespace RTSEngine.RTSEngine
             Window.FormClosing += Window_FormClosing;
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
-            
+
+            world = new World(worldAABB, gravity, doSleep);
 
             Application.Run(Window);
         }
@@ -72,8 +94,6 @@ namespace RTSEngine.RTSEngine
         {
             GetKeyUp(e);
         }
-
-
 
         //Gameloop
         void GameLoop()
@@ -132,10 +152,16 @@ namespace RTSEngine.RTSEngine
                 AllSprites.Remove(sprite);
             }
         }
+            float timeStep = 1.0f / 60.0f;
+            int velocityIterations = 8;
+            int positionIterations = 1;
+
 
         //used to render everything.
         private void Renderer (object sender, PaintEventArgs e)
         {
+            world.Step(timeStep, velocityIterations, positionIterations);
+
             Graphics g = e.Graphics;
             g.Clear(BackroundColor);
 

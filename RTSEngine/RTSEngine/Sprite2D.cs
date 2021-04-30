@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
+
 
 namespace RTSEngine.RTSEngine
 {
@@ -18,6 +22,8 @@ namespace RTSEngine.RTSEngine
         public string Tag = "";
         public Bitmap Sprite = null;
         public bool isReference = false;
+        Body body;
+        BodyDef bodyDef = new BodyDef();
 
         /// <summary>
         /// Sets the sacle position tag and immage of the sprite that you are using
@@ -68,6 +74,55 @@ namespace RTSEngine.RTSEngine
 
             Log.Info($"[SPRITE2D]({Tag}) - Has Been registered!");
             RTSEngine.RegisterSprite(this);
+        }
+
+        public void CreateDynamic()
+        {
+            bodyDef = new BodyDef();
+            bodyDef.Position.X = Position.x;
+            bodyDef.Position.Y = Position.y;
+            // Define the dynamic body. We set its position and call the body factory.
+            bodyDef.Position = new Vec2(this.Position.x, this.Position.y);
+            Body body = RTSEngine.world.CreateBody(bodyDef);
+
+            this.body = body;
+
+            // Define another box shape for our dynamic body.
+            PolygonDef shapeDef = new PolygonDef();
+            shapeDef.SetAsBox(1.0f, 1.0f);
+
+            // Set the box density to be non-zero, so it will be dynamic.
+            shapeDef.Density = 1.0f;
+
+            // Override the default friction.
+            shapeDef.Friction = 0.3f;
+
+            // Add the shape to the body.
+            body.CreateShape(shapeDef);
+
+            // Now tell the dynamic body to compute it's mass properties base
+            // on its shape.
+            body.SetMassFromShapes();
+
+        }
+
+        public void UpdatePosition()
+        {
+            if (body == null)
+            {
+                body = RTSEngine.world.CreateBody(bodyDef);
+                Log.Error("Body was null");
+            }
+            if (body != null)
+            {
+                this.Position.y = body.GetPosition().Y;
+                this.Position.x = body.GetPosition().X;
+               // Log.Info("Body is not null");
+            }
+            else
+            {
+                Log.Error("Body Is null");
+            }
         }
 
         public bool IsColliding(Sprite2D a, Sprite2D b)

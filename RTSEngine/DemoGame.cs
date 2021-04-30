@@ -41,9 +41,9 @@ namespace RTSEngine
         string[,] MapOld =
        {
             {"g","g","g","g","g","g","g"},
-            {"g",".",".",".",".",".","g"},
-            {"g","j",".","j","g",".","g"},
-            {"g",".","g","g","g",".","g"},
+            {"g",".",".",".",".","c","g"},
+            {"g","j",".","j","g","c","g"},
+            {"g",".","g","g","g","c","g"},
             {"g",".","g","j","g",".","g"},
             {"g",".","g","j",".",".","g"},
             {"g","g","g","g","g","g","g"},
@@ -83,12 +83,9 @@ namespace RTSEngine
                     if (Map[j, i] == "p")
                     {
                         player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+                        player.CreateDynamic();
                     }
                 }
-            }
-            if (player == null)
-            {
-                player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
             }
         }
 
@@ -105,27 +102,28 @@ namespace RTSEngine
             time++;
             if (player != null)
             {
+                player.UpdatePosition();
                 if (up)
                 {
-                    player.Position.y -= speed;
+                    //player.Position.y -= speed;
                 }
                 if (down)
                 {
-                    player.Position.y += speed;
+                   //player.Position.y += speed;
                 }
                 if (left)
                 {
-                    player.Position.x -= speed;
+                    //player.Position.x -= speed;
                 }
                 if (right)
                 {
-                    player.Position.x += speed;
+                    //player.Position.x += speed;
                 }
-                if (player.IsColliding("Ground") != null)
-                {
-                    player.Position.x = lastPos.x;
-                    player.Position.y = lastPos.y;
-                }
+                //if (player.IsColliding("Ground") != null)
+                //{
+                    //player.Position.x = lastPos.x;
+                    //player.Position.y = lastPos.y;
+                //}
                 Sprite2D jewel = player.IsColliding("Jewel");
                 if (jewel != null)
                 {

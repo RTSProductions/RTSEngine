@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RTSEngine.RTSEngine
 {
     /// <summary>
-    /// A 2D float array that can be used for the scale or of corse position of an object
+    /// A 2D float array that can be used for the scale or position of an object
     /// </summary>
     public class Vector2
     {
@@ -34,5 +34,7 @@ namespace RTSEngine.RTSEngine
         {
             return new Vector2(0,0);
         }
+
     }
 }
+    

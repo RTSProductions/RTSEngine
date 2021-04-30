@@ -19,11 +19,27 @@ namespace RTSEngine
         bool up;
         bool down;
         Vector2 lastPos = Vector2.Zero();
-        public float speed = 3;
+        public float speed = 6;
 
         //a 2 dimentinal string array used to make the starting map.
         string[,] Map =
         {
+            {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
+            {"g", ".", ".", ".", ".", ".", "g", ".", ".", "c", ".", "j", "g", "j", "g"},
+            {"g", ".", "g", ".", ".", ".", "g", ".", ".", "g", ".", "j", "g", "j", "g"},
+            {"g", ".", "g", ".", ".", ".", "g", ".", ".", "g", ".", "j", "g", "j", "g"},
+            {"g", "c", "g", ".", ".", ".", "g", ".", ".", "g", ".", ".", "g", "j", "g"},
+            {"g", "c", "g", ".", ".", ".", "g", ".", "g", "g", "g", ".", "g", "j", "g"},
+            {"g", "c", "g", "c", ".", ".", "g", ".", ".", ".", "g", ".", "g", "c", "g"},
+            {"g", ".", "g", "g", "g", ".", "g", ".", ".", ".", "g", ".", "g", "c", "g"},
+            {"g", ".", "g", "p", "g", ".", "g", "g", "g", ".", "g", ".", "g", "c", "g"},
+            {"g", ".", "g", ".", "g", ".", "g", ".", ".", ".", "g", ".", "g", "c", "g"},
+            {"g", ".", ".", ".", "g", ".", "j", ".", ".", ".", "g", ".", ".", "c", "g"},
+            {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
+        };
+
+        string[,] MapOld =
+       {
             {"g","g","g","g","g","g","g"},
             {"g",".",".",".",".",".","g"},
             {"g","j",".","j","g",".","g"},
@@ -41,9 +57,11 @@ namespace RTSEngine
         {
             Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
             Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
+            Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
+
+            CameraZoom = new Vector2(.8f, .8f);
 
             BackroundColor = Color.Black;
-            CameraPosition.x = 100;
 
             //Generate the map.
             for (int i = 0; i < Map.GetLength(1); i++)
@@ -58,10 +76,20 @@ namespace RTSEngine
                     {
                         new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), jewelRef, "Jewel");
                     }
+                    if (Map[j, i] == "c")
+                    {
+                        new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), coinRef, "Coin");
+                    }
+                    if (Map[j, i] == "p")
+                    {
+                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+                    }
                 }
             }
-
-            player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+            if (player == null)
+            {
+                player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+            }
         }
 
         public override void OnDraw()
@@ -75,36 +103,44 @@ namespace RTSEngine
         public override void OnUpdate()
         {
             time++;
-            if (up)
+            if (player != null)
             {
-                player.Position.y  -= speed;
-            }
-            if (down)
-            {
-                player.Position.y += speed;
-            }
-            if (left)
-            {
-                player.Position.x -= speed;
-            }
-            if (right)
-            {
-                player.Position.x += speed;
-            }
-            if (player.IsColliding("Ground") != null)
-            {
-               player.Position.x = lastPos.x;
-               player.Position.y = lastPos.y;
-            }
-            Sprite2D jewel = player.IsColliding("Jewel");
-            if (jewel != null)
-            {
-                jewel.DestroySelf();
-            }
-            else
-            {
-                lastPos.x = player.Position.x;
-                lastPos.y = player.Position.y;
+                if (up)
+                {
+                    player.Position.y -= speed;
+                }
+                if (down)
+                {
+                    player.Position.y += speed;
+                }
+                if (left)
+                {
+                    player.Position.x -= speed;
+                }
+                if (right)
+                {
+                    player.Position.x += speed;
+                }
+                if (player.IsColliding("Ground") != null)
+                {
+                    player.Position.x = lastPos.x;
+                    player.Position.y = lastPos.y;
+                }
+                Sprite2D jewel = player.IsColliding("Jewel");
+                if (jewel != null)
+                {
+                    jewel.DestroySelf();
+                }
+                Sprite2D coin = player.IsColliding("Coin");
+                if (coin != null)
+                {
+                    coin.DestroySelf();
+                }
+                else
+                {
+                    lastPos.x = player.Position.x;
+                    lastPos.y = player.Position.y;
+                }
             }
 
         }

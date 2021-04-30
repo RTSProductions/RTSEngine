@@ -17,6 +17,8 @@ namespace RTSEngine.RTSEngine
         public string Directory = "";
         public string Tag = "";
         public Bitmap Sprite = null;
+        public bool isReference = false;
+
         /// <summary>
         /// Sets the sacle position tag and immage of the sprite that you are using
         /// </summary>
@@ -37,7 +39,34 @@ namespace RTSEngine.RTSEngine
 
             this.Sprite = sprite;
 
-            Log.Info($"[SHAPE2D]({Tag}) - Has Been registered!");
+            Log.Info($"[SPRITE2D]({Tag}) - Has Been registered!");
+            RTSEngine.RegisterSprite(this);
+        }
+
+        public Sprite2D(string Directory)
+        {
+            this.isReference = true;
+            this.Directory = Directory;
+
+            Image temp = Image.FromFile($"Assets/Sprites/PNG/{Directory}.png");
+
+            Bitmap sprite = new Bitmap(temp, 50, 50);
+
+            this.Sprite = sprite;
+
+            Log.Info($"[SPRITE2D]({Tag}) - Has Been registered!");
+            RTSEngine.RegisterSprite(this);
+        }
+
+        public Sprite2D(Vector2 Position, Vector2 Scale, Sprite2D refrence, String Tag)
+        {
+            this.Position = Position;
+            this.Scale = Scale;
+            this.Tag = Tag;
+
+            this.Sprite = refrence.Sprite;
+
+            Log.Info($"[SPRITE2D]({Tag}) - Has Been registered!");
             RTSEngine.RegisterSprite(this);
         }
 

@@ -35,6 +35,7 @@ namespace RTSEngine.RTSEngine
         public Color BackroundColor = Color.Aqua;
 
         public Vector2 CameraPosition = Vector2.Zero();
+        public Vector2 CameraZoom = new Vector2(1, 1);
         public float CameraAngle = 0f;
         public RTSEngine(Vector2 screenSize, string title)
         {
@@ -84,7 +85,7 @@ namespace RTSEngine.RTSEngine
                 {
                     Window.BeginInvoke((MethodInvoker)delegate { Window.Refresh(); });
                     OnUpdate();
-                    Thread.Sleep(1);
+                    Thread.Sleep(2);
                 }
                 catch
                 {
@@ -140,13 +141,24 @@ namespace RTSEngine.RTSEngine
 
             g.TranslateTransform(CameraPosition.x, CameraPosition.y);
             g.RotateTransform(CameraAngle);
-            foreach (Shape2D shape in AllShapes)
+            g.ScaleTransform(CameraZoom.x, CameraZoom.y);
+            try
             {
-                g.FillRectangle(new SolidBrush(shape.color), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
+                foreach (Shape2D shape in AllShapes)
+                {
+                    g.FillRectangle(new SolidBrush(shape.color), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
+                }
+                foreach (Sprite2D sprite in AllSprites)
+                {
+                    if (!sprite.isReference)
+                    {
+                        g.DrawImage(sprite.Sprite, sprite.Position.x, sprite.Position.y, sprite.Scale.x, sprite.Scale.y);
+                    }
+                }
             }
-            foreach (Sprite2D sprite in AllSprites)
+            catch
             {
-                g.DrawImage(sprite.Sprite, sprite.Position.x, sprite.Position.y, sprite.Scale.x, sprite.Scale.y);
+
             }
 
         }

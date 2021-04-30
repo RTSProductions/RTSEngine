@@ -26,7 +26,7 @@ namespace RTSEngine
         {
             {"g","g","g","g","g","g","g"},
             {"g",".",".",".",".",".","g"},
-            {"g","j","j","j","g",".","g"},
+            {"g","j",".","j","g",".","g"},
             {"g",".","g","g","g",".","g"},
             {"g",".","g","j","g",".","g"},
             {"g",".","g","j",".",".","g"},
@@ -39,20 +39,24 @@ namespace RTSEngine
         //called when the game starts.
         public override void OnLoad()
         {
+            Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
+            Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
+
             BackroundColor = Color.Black;
             CameraPosition.x = 100;
 
+            //Generate the map.
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j  < Map.GetLength(0); j ++)
                 {
                     if (Map[j, i] == "g")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
                     }
                     if (Map[j, i] == "j")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "Items/yellowJewel", "Collectable");
+                        new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), jewelRef, "Jewel");
                     }
                 }
             }
@@ -91,6 +95,11 @@ namespace RTSEngine
             {
                player.Position.x = lastPos.x;
                player.Position.y = lastPos.y;
+            }
+            Sprite2D jewel = player.IsColliding("Jewel");
+            if (jewel != null)
+            {
+                jewel.DestroySelf();
             }
             else
             {

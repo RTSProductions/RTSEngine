@@ -1,2 +1,2 @@
 # RTS-Engine
-A 2D game engine i made.
+A simple 2D game engine i made.

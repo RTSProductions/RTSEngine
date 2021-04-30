@@ -12,11 +12,15 @@ namespace RTSEngine.RTSEngine
 
     class Canvas : Form
     {
+        //used to draw the window
         public Canvas()
         {
             this.DoubleBuffered = true;
         }
     }
+    /// <summary>
+    /// The game engine that all of this uses.
+    /// </summary>
     public abstract class RTSEngine
     {
         private Vector2 ScreenSize = new Vector2(512, 512);
@@ -44,11 +48,18 @@ namespace RTSEngine.RTSEngine
             Window.Paint += Renderer;
             Window.KeyDown += Window_KeyDown;
             Window.KeyUp += Window_KeyUp;
+            Window.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Window.FormClosing += Window_FormClosing;
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
             
 
             Application.Run(Window);
+        }
+
+        private void Window_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GameLoopThread.Abort();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -63,6 +74,7 @@ namespace RTSEngine.RTSEngine
 
 
 
+        //Gameloop
         void GameLoop()
         {
             OnLoad();
@@ -81,8 +93,10 @@ namespace RTSEngine.RTSEngine
             }
         }
 
+        //called when the game starts
         public abstract void OnLoad();
 
+        //called once per frame
         public abstract void OnUpdate();
 
         public abstract void OnDraw();
@@ -118,6 +132,7 @@ namespace RTSEngine.RTSEngine
             }
         }
 
+        //used to render everything.
         private void Renderer (object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -135,7 +150,16 @@ namespace RTSEngine.RTSEngine
             }
 
         }
+        /// <summary>
+        /// Used for input
+        /// </summary>
+        /// <param name="e"></param>
         public abstract void GetKeyDown(KeyEventArgs e);
+
+        /// <summary>
+        /// Used for input
+        /// </summary>
+        /// <param name="e"></param>
         public abstract void GetKeyUp(KeyEventArgs e);
 
     }

@@ -7,6 +7,9 @@ using System.Drawing;
 
 namespace RTSEngine.RTSEngine
 {
+    /// <summary>
+    /// A squar.
+    /// </summary>
     public class Shape2D
     {
         public Vector2 Position = null;

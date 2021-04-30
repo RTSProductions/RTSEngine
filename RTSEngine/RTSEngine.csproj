@@ -68,7 +68,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /I /E $(ProjectDir)Assets $(TargetDir)Assets
+    <PostBuildEvent>xcopy /Y /I /E /F "$(ProjectDir)Assets" "$(TargetDir)Assets"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

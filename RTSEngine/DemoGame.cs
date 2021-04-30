@@ -11,6 +11,7 @@ namespace RTSEngine
 {
     class DemoGame : RTSEngine.RTSEngine
     {
+        //the player
         Sprite2D player = null;
 
         bool left;
@@ -18,21 +19,24 @@ namespace RTSEngine
         bool up;
         bool down;
         Vector2 lastPos = Vector2.Zero();
+        public float speed = 3;
 
+        //a 2 dimentinal string array used to make the starting map.
         string[,] Map =
         {
             {"g","g","g","g","g","g","g"},
             {"g",".",".",".",".",".","g"},
-            {"g",".",".",".","g",".","g"},
+            {"g","j","j","j","g",".","g"},
             {"g",".","g","g","g",".","g"},
-            {"g",".","g",".","g",".","g"},
-            {"g",".","g",".",".",".","g"},
+            {"g",".","g","j","g",".","g"},
+            {"g",".","g","j",".",".","g"},
             {"g","g","g","g","g","g","g"},
         };
         public DemoGame() : base(new Vector2(615, 515), "RTS Engine Demo")
         {
 
         }
+        //called when the game starts.
         public override void OnLoad()
         {
             BackroundColor = Color.Black;
@@ -46,6 +50,10 @@ namespace RTSEngine
                     {
                         new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
                     }
+                    if (Map[j, i] == "j")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "Items/yellowJewel", "Collectable");
+                    }
                 }
             }
 
@@ -58,26 +66,28 @@ namespace RTSEngine
         }
 
         int time = 0;
+
+        //onUpdate is called once per frame.
         public override void OnUpdate()
         {
             time++;
             if (up)
             {
-                player.Position.y  -= 1f;
+                player.Position.y  -= speed;
             }
             if (down)
             {
-                player.Position.y += 1f;
+                player.Position.y += speed;
             }
             if (left)
             {
-                player.Position.x -= 1f;
+                player.Position.x -= speed;
             }
             if (right)
             {
-                player.Position.x += 1f;
+                player.Position.x += speed;
             }
-            if (player.IsColliding("Ground"))
+            if (player.IsColliding("Ground") != null)
             {
                player.Position.x = lastPos.x;
                player.Position.y = lastPos.y;
@@ -90,6 +100,7 @@ namespace RTSEngine
 
         }
 
+        //input
         public override void GetKeyDown(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = true; }
@@ -98,6 +109,7 @@ namespace RTSEngine
             if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = true; }
         }
 
+        //input
         public override void GetKeyUp(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = false; }

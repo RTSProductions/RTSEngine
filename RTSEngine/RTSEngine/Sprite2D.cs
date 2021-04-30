@@ -7,6 +7,9 @@ using System.Drawing;
 
 namespace RTSEngine.RTSEngine
 {
+    /// <summary>
+    /// A sprite.
+    /// </summary>
     public class Sprite2D
     {
         public Vector2 Position = null;
@@ -51,7 +54,7 @@ namespace RTSEngine.RTSEngine
             return false;
         }
 
-        public bool IsColliding(string Tag)
+        public Sprite2D IsColliding(string Tag)
         {
             foreach(Sprite2D b in RTSEngine.AllSprites)
             {
@@ -62,13 +65,13 @@ namespace RTSEngine.RTSEngine
                          Position.y < b.Position.y + b.Scale.y &&
                          Position.y + Scale.y > b.Position.y)
                     {
-                        return true;
+                        return b;
                     }
                 }
             }
 
 
-            return false;
+            return null;
         }
 
         public void DestroySelf()

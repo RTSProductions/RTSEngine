@@ -76,6 +76,9 @@ namespace RTSEngine.RTSEngine
             RTSEngine.RegisterSprite(this);
         }
 
+        /// <summary>
+        /// Creates a dynamic physics object.
+        /// </summary>
         public void CreateDynamic()
         {
             bodyDef = new BodyDef();
@@ -105,7 +108,9 @@ namespace RTSEngine.RTSEngine
             body.SetMassFromShapes();
 
         }
-
+        /// <summary>
+        /// Updates the position of a dynamic physics object.
+        /// </summary>
         public void UpdatePosition()
         {
             if (body == null)
@@ -125,6 +130,12 @@ namespace RTSEngine.RTSEngine
             }
         }
 
+        /// <summary>
+        /// Check if sprite a is colliding with sprite b.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public bool IsColliding(Sprite2D a, Sprite2D b)
         {
            if (a.Position.x < b.Position.x + b.Scale.x &&
@@ -137,7 +148,11 @@ namespace RTSEngine.RTSEngine
 
             return false;
         }
-
+        /// <summary>
+        /// Check if this sprite is colliding with any sprite with the given tag.
+        /// </summary>
+        /// <param name="Tag"></param>
+        /// <returns></returns>
         public Sprite2D IsColliding(string Tag)
         {
             foreach(Sprite2D b in RTSEngine.AllSprites)
@@ -158,6 +173,9 @@ namespace RTSEngine.RTSEngine
             return null;
         }
 
+        /// <summary>
+        /// Destory the sprite.
+        /// </summary>
         public void DestroySelf()
         {
             Log.Info($"[SHAPE2D]({Tag}) - Has Been destroyed!");

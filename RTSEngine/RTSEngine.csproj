@@ -115,6 +115,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RTSEngine\Log.cs" />
+    <Compile Include="RTSEngine\Mathf.cs" />
     <Compile Include="RTSEngine\RTSEngine.cs">
       <SubType>Form</SubType>
     </Compile>

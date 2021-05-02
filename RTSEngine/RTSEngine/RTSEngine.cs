@@ -53,7 +53,7 @@ namespace RTSEngine.RTSEngine
         bool doSleep = false;
 
         // Define the gravity vector.
-         Vec2 gravity = new Vec2(0.0f, -10.0f);
+         Vec2 gravity = new Vec2(0.0f, 10.0f);
 
 
         public static World world = null;

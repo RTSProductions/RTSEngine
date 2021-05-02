@@ -35,6 +35,18 @@ namespace RTSEngine.RTSEngine
             return new Vector2(0,0);
         }
 
+        /// <summary>
+        /// Linearly intorpolates from the first vector2 to the secound vector2 using the speed peramitor.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="speed"></param>
+        /// <returns></returns>
+        public static Vector2 Lerp(Vector2 a, Vector2 b, float speed)
+        {
+            return new Vector2(Mathf.Lerp(a.x, b.x, speed), Mathf.Lerp(a.y, b.y, speed));
+        }
+
     }
 }
     

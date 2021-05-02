@@ -18,7 +18,7 @@ namespace RTSEngine.RTSEngine
         public static void Normal(string message)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(DateTime.Now + message);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -29,7 +29,7 @@ namespace RTSEngine.RTSEngine
         public static void Info(string message)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(DateTime.Now + message);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -40,14 +40,14 @@ namespace RTSEngine.RTSEngine
         public static void Warning(string message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(DateTime.Now + message);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Error(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(DateTime.Now + message);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

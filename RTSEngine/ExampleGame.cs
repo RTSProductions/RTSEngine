@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 using RTSEngine.RTSEngine;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Numerics;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
+using Color = System.Drawing.Color;
 
 namespace RTSEngine
 {
-    class DemoGame : RTSEngine.RTSEngine
+    class ExampleGame : RTSEngine.RTSEngine
     {
         //the player
         Sprite2D player = null;
@@ -21,52 +26,54 @@ namespace RTSEngine
         Vector2 lastPos = Vector2.Zero();
         public float speed = 6;
 
-        //a 2 dimentinal string array used to make the starting map.
         string[,] Map =
-        {
-            {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
-            {"g", ".", ".", ".", ".", ".", "g", ".", ".", "c", ".", "j", "g", "j", "g"},
-            {"g", ".", "g", ".", ".", ".", "g", ".", ".", "g", ".", "j", "g", "j", "g"},
-            {"g", ".", "g", ".", ".", ".", "g", ".", ".", "g", ".", "j", "g", "j", "g"},
-            {"g", "c", "g", ".", ".", ".", "g", ".", ".", "g", ".", ".", "g", "j", "g"},
-            {"g", "c", "g", ".", ".", ".", "g", ".", "g", "g", "g", ".", "g", "j", "g"},
-            {"g", "c", "g", "c", ".", ".", "g", ".", ".", ".", "g", ".", "g", "c", "g"},
-            {"g", ".", "g", "g", "g", ".", "g", ".", ".", ".", "g", ".", "g", "c", "g"},
-            {"g", ".", "g", "p", "g", ".", "g", "g", "g", ".", "g", ".", "g", "c", "g"},
-            {"g", ".", "g", ".", "g", ".", "g", ".", ".", ".", "g", ".", "g", "c", "g"},
-            {"g", ".", ".", ".", "g", ".", "j", ".", ".", ".", "g", ".", ".", "c", "g"},
-            {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
-        };
-
-        string[,] MapOld =
         {
             {"g","g","g","g","g","g","g"},
             {"g",".",".",".",".","c","g"},
-            {"g","j",".","j","g","c","g"},
+            {"g","j","p","j","g","c","g"},
             {"g",".","g","g","g","c","g"},
             {"g",".","g","j","g",".","g"},
             {"g",".","g","j",".",".","g"},
             {"g","g","g","g","g","g","g"},
         };
-        public DemoGame() : base(new Vector2(615, 515), "RTS Engine Demo")
+
+        public ExampleGame() : base(new Vector2(615, 515), "RTS Engine Demo")
         {
 
         }
-        //called when the game starts.
+
+        public override void GetKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = true; }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = true; }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = true; }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = true; }
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = false; }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = false; }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = false; }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = false; }
+        }
+
+        public override void OnDraw()
+        {
+            
+        }
+
         public override void OnLoad()
         {
+            BackroundColor = Color.Black;
+
             Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
             Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
             Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
 
-            CameraZoom = new Vector2(.8f, .8f);
-
-            BackroundColor = Color.Black;
-
-            //Generate the map.
             for (int i = 0; i < Map.GetLength(1); i++)
             {
-                for (int j = 0; j  < Map.GetLength(0); j ++)
+                for (int j = 0; j < Map.GetLength(0); j++)
                 {
                     if (Map[j, i] == "g")
                     {
@@ -83,26 +90,15 @@ namespace RTSEngine
                     if (Map[j, i] == "p")
                     {
                         player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
-                        //player.CreateDynamic();
                     }
                 }
             }
         }
 
-        public override void OnDraw()
-        {
-            
-        }
-
-        int time = 0;
-
-        //onUpdate is called once per frame.
         public override void OnUpdate()
         {
-            time++;
             if (player != null)
             {
-                //player.UpdatePosition();
                 if (up)
                 {
                     player.Position.y -= speed;
@@ -119,6 +115,7 @@ namespace RTSEngine
                 {
                     player.Position.x += speed;
                 }
+
                 if (player.IsColliding("Ground") != null)
                 {
                     player.Position.x = lastPos.x;
@@ -129,36 +126,19 @@ namespace RTSEngine
                     lastPos.x = player.Position.x;
                     lastPos.y = player.Position.y;
                 }
+
                 Sprite2D jewel = player.IsColliding("Jewel");
                 if (jewel != null)
                 {
                     jewel.DestroySelf();
                 }
+
                 Sprite2D coin = player.IsColliding("Coin");
                 if (coin != null)
                 {
                     coin.DestroySelf();
                 }
             }
-
-        }
-
-        //input
-        public override void GetKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = true; }
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = true; }
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = true; }
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = true; }
-        }
-
-        //input
-        public override void GetKeyUp(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = false; }
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = false; }
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = false; }
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = false; }
         }
     }
 }

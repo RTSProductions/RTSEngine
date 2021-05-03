@@ -63,7 +63,7 @@ Now you should be getting an error on the class. Don't worry were about to fix t
 
 Add some overide voids
 ```cs
-public override void GetKeyDown(KeyEventArgs e)
+        public override void GetKeyDown(KeyEventArgs e)
         {
             
         }
@@ -96,3 +96,37 @@ So add this in the code
 
         }
 ```
+Now add on : `: base(new Vector2(615, 515), "Example Game")` Like this:
+```cs
+        public ExampleGame() : base(new Vector2(615, 515), "Example Game")
+        {
+
+        }
+```
+Now add some variables
+```cs
+        //the player
+        Sprite2D player = null;
+
+        bool left;
+        bool right;
+        bool up;
+        bool down;
+        Vector2 lastPos = Vector2.Zero();
+        public float speed = 6;
+```
+Now in the `GetKeyDown` method add :
+```cs
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = true; }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = true; }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = true; }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = true; }
+```
+And in the `GetKeyUp` mothod add :
+```cs
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = false; }
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = false; }
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = false; }
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = false; }
+```
+So now we are getting input from the player wich we can use to move.

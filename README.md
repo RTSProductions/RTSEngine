@@ -306,3 +306,82 @@ Then in the second for loop add another if statment:
                     }
 ```
 Now if we start we should see a little green blob where you put the `p`.
+But we can't move him, luckly we are reciveing input from the player so all we need to do is use it.
+So in the `OnUpdate` method add:
+```cs
+            if (player != null)
+            {
+
+            }
+```
+Now we can use the input bools.
+First add the y axsis like this:
+```cs
+                if (up)
+                {
+                    player.Position.y -= speed;
+                }
+                if (down)
+                {
+                    player.Position.y += speed;
+                }
+```
+Now add the x axsis:
+```cs
+                if (left)
+                {
+                    player.Position.x -= speed;
+                }
+                if (right)
+                {
+                    player.Position.x += speed;
+                }
+```
+Now if we start the game we have a little green player that can move round, fun!
+But it wont collide with the walls.
+So we need to make it registor the collsion, luckly the `Sprite2D` does all the work for us.
+So next lets add this:
+```cs
+                if (player.IsColliding("Ground") != null)
+                {
+
+                }
+```
+In the collide statment add:
+```cs
+                    player.Position.x = lastPos.x;
+                    player.Position.y = lastPos.y;
+```
+This checks if were colliding with the walls and if so makes it so we can't move through the walls!
+Now add an else statment so we can update the lasp position of the player:
+```cs
+                else
+                {
+                    lastPos.x = player.Position.x;
+                    lastPos.y = player.Position.y;
+                }
+```
+Now if you play it you will notice that we can't collect the coins and jewels
+So first add:
+```cs
+                Sprite2D jewel = player.IsColliding("Jewel");
+                if (jewel != null)
+                {
+                    jewel.DestroySelf();
+                }
+```
+This will make it so we can collect the jewels.
+Now do the same thing with the coins like this:
+```cs
+                Sprite2D coin = player.IsColliding("Coin");
+                if (coin != null)
+                {
+                    coin.DestroySelf();
+                }
+```
+So now we can collect the coins, great!
+So now our basic game is done, awesome!
+So your script should look like this:
+```cs
+
+```

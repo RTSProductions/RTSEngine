@@ -4,8 +4,9 @@
 A simple 2D game engine with physics I made.
 
 # Intructions
-How To Make A Game.
+Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.
+# How To Make A Game
 
 ```cs
-lol
+
 ```

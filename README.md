@@ -339,7 +339,7 @@ Then in the second for loop add another if statment:
 ```cs
 if (Map[j, i] == "p")
 {
-    player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
 }
 ```
 Now if we start we should see a little green blob where you put the `p`.

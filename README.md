@@ -187,6 +187,7 @@ Now in the `OnLoad` method add three sprites that we can use for all the other s
 ```cs
             BackroundColor = Color.Black;
 
+            Sprite2D playerRef = new Sprite2D("Players/Player Green/playerGreen_walk1");
             Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
             Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
             Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
@@ -337,10 +338,10 @@ In the map array add a `p` for the player like this:
 ```
 Then in the second for loop add another if statment:
 ```cs
-if (Map[j, i] == "p")
-{
-player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
-}
+                    if (Map[j, i] == "p")
+                    {
+                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), playerRef, "Player");
+                    }
 ```
 Now if we start we should see a little green blob where you put the `p`.
 But we can't move him, luckly we are reciveing input from the player so all we need to do is use it.
@@ -489,6 +490,7 @@ namespace RTSEngine
         {
             BackroundColor = Color.Black;
 
+            Sprite2D playerRef = new Sprite2D("Players/Player Green/playerGreen_walk1");
             Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
             Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
             Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
@@ -511,7 +513,7 @@ namespace RTSEngine
                     }
                     if (Map[j, i] == "p")
                     {
-                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), playerRef, "Player");
                     }
                 }
             }
@@ -665,6 +667,7 @@ namespace RTSEngine
         {
             BackroundColor = Color.Black;
 
+            Sprite2D playerRef = new Sprite2D("Players/Player Green/playerGreen_walk1");
             Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
             Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
             Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
@@ -689,7 +692,7 @@ namespace RTSEngine
                     }
                     if (Map[j, i] == "p")
                     {
-                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), playerRef, "Player");
                     }
                 }
             }

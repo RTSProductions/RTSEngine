@@ -7,6 +7,22 @@ A simple 2D game engine with physics I made.
 Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.
 # How To Make A Game
 
-```cs
+first creat a class and call it something like `Game` or `Platformer` or `TopDown` or `Dungeon`
 
+then add these using tags
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RTSEngine.RTSEngine;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Numerics;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
+using Color = System.Drawing.Color;
 ```

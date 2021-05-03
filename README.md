@@ -168,7 +168,7 @@ This way we can loop through each character in the array.
 Now we will make it so that the sprites will render.
 Add this in the second for loop :
 ```cs
-                   if (Map[j, i] == "g")
+                    if (Map[j, i] == "g")
                     {
                         new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
                     }
@@ -216,7 +216,7 @@ namespace RTSEngine
         {
             {"g","g","g","g","g","g","g"},
             {"g",".",".",".",".","c","g"},
-            {"g","j",".","j","g","c","g"},
+            {"g","j","p","j","g","c","g"},
             {"g",".","g","g","g","c","g"},
             {"g",".","g","j","g",".","g"},
             {"g",".","g","j",".",".","g"},
@@ -251,11 +251,28 @@ namespace RTSEngine
 
         public override void OnLoad()
         {
+            BackroundColor = Color.Black;
+
+            Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
+            Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
+            Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
+
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j < Map.GetLength(0); j++)
                 {
-
+                    if (Map[j, i] == "g")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
+                    }
+                    if (Map[j, i] == "j")
+                    {
+                        new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), jewelRef, "Jewel");
+                    }
+                    if (Map[j, i] == "c")
+                    {
+                        new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), coinRef, "Coin");
+                    }
                 }
             }
         }
@@ -267,3 +284,25 @@ namespace RTSEngine
     }
 }
 ```
+Now we need to add the player
+In the map array add a `p` for the player like this:
+```cs
+        string[,] Map =
+        {
+            {"g","g","g","g","g","g","g"},
+            {"g",".",".",".",".","c","g"},
+            {"g","j","p","j","g","c","g"},
+            {"g",".","g","g","g","c","g"},
+            {"g",".","g","j","g",".","g"},
+            {"g",".","g","j",".",".","g"},
+            {"g","g","g","g","g","g","g"},
+        };
+```
+Then in the second for loop add another if statment:
+```cs
+                    if (Map[j, i] == "p")
+                    {
+                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+                    }
+```
+Now if we start we should see a little green blob where you put the `p`.

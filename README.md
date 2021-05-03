@@ -9,7 +9,7 @@ Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the pro
 
 first creat a class and call it something like `Game` or `Platformer` or `TopDown` or `Dungeon`
 
-then add these using tags
+then replace all the using tags with these using tags.
 
 ```cs
 using System;
@@ -25,4 +25,11 @@ using Box2DX.Dynamics;
 using Box2DX.Collision;
 using Box2DX.Common;
 using Color = System.Drawing.Color;
+```
+then on the class add `: RTSEngine.RTSEngine` like this
+```cs
+    class ExampleGame : RTSEngine.RTSEngine
+    {
+
+    }
 ```

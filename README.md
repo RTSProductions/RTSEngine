@@ -8,7 +8,7 @@ A simple 2D game engine with physics I made.
 Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.
 # How To Make A Game
 
-before we start you need to understand some things about the code
+before we start you need to understand some things about the code.                                                                      
 VECTOR2:
 A vector 2 is a float array with two variables `x` and `y` this can be used for the scale and the position of an object.
 

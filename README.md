@@ -33,3 +33,29 @@ then on the class add `: RTSEngine.RTSEngine` like this
 
     }
 ```
+
+now your class should look like this:
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RTSEngine.RTSEngine;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Numerics;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
+using Color = System.Drawing.Color;
+
+namespace RTSEngine
+{
+    class ExampleGame : RTSEngine.RTSEngine
+    {
+
+    }
+}
+
+```

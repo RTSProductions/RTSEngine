@@ -3,7 +3,7 @@
 
 A simple 2D game engine with physics I made.
 
-# Intructions
+# Instructions
 Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.
 # How To Make A Game
 
@@ -58,4 +58,41 @@ namespace RTSEngine
     }
 }
 
+```
+Now you should be getting an error on the class. Don't worry were about to fix that.
+
+Add some overide voids
+```cs
+public override void GetKeyDown(KeyEventArgs e)
+        {
+            
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            
+        }
+
+        public override void OnDraw()
+        {
+            
+        }
+
+        public override void OnLoad()
+        {
+            
+        }
+
+        public override void OnUpdate()
+        {
+            
+        }
+```
+Now you should still be getting one error. That is because you need to add a struct.
+So add this in the code
+```cs
+        public ExampleGame()
+        {
+
+        }
 ```

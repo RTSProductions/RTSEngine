@@ -38,6 +38,8 @@ namespace RTSEngine.RTSEngine
 
         public System.Drawing.Color BackroundColor = System.Drawing.Color.Aqua;
 
+        public int timeScale = 2;
+
         public Vector2 CameraPosition = Vector2.Zero();
         public Vector2 CameraZoom = new Vector2(1, 1);
         public float CameraAngle = 0f;
@@ -53,7 +55,7 @@ namespace RTSEngine.RTSEngine
         bool doSleep = false;
 
         // Define the gravity vector.
-         Vec2 gravity = new Vec2(0.0f, 10.0f);
+        public  Vec2 gravity = new Vec2(0.0f, 10.0f);
 
 
         public static World world = null;
@@ -105,7 +107,7 @@ namespace RTSEngine.RTSEngine
                 {
                     Window.BeginInvoke((MethodInvoker)delegate { Window.Refresh(); });
                     OnUpdate();
-                    Thread.Sleep(2);
+                    Thread.Sleep(timeScale);
                 }
                 catch
                 {

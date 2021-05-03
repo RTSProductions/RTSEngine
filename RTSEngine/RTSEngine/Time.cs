@@ -14,10 +14,10 @@ namespace RTSEngine.RTSEngine
 
         public Time()
         {
-            waitTime(1);
+           
         }
 
-        public void wait(float x)
+        public static void wait(float x)
         {
             DateTime t = DateTime.Now;
             DateTime tf = DateTime.Now.AddSeconds(x);

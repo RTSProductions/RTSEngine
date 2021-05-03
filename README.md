@@ -130,3 +130,18 @@ And in the `GetKeyUp` mothod add :
             if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = false; }
 ```
 So now we are getting input from the player wich we can use to move.
+
+Now in oder to make the player and the map we make a 2 dimentinal string array or `string[,] Map` then in the array us the `.` character for an empty space and use the `g` for a ground space also add the `j` for a jewel and `c` for a coin.
+Like this:
+```cs
+        string[,] Map =
+        {
+            {"g","g","g","g","g","g","g"},
+            {"g",".",".",".",".","c","g"},
+            {"g","j",".","j","g","c","g"},
+            {"g",".","g","g","g","c","g"},
+            {"g",".","g","j","g",".","g"},
+            {"g",".","g","j",".",".","g"},
+            {"g","g","g","g","g","g","g"},
+        };
+```

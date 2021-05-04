@@ -19,7 +19,7 @@ SPRITE2D:
 Sprite2D is a sprite that can be rendered, moved, sacled, destroyed, it can even collide with other sprites and you can also make it a physics object.
 To creat a sprite use:
 ```cs
-Sprite2D sprite = new Sprite2D(Position, Scale, Directory, Tag)
+Sprite2D sprite = new Sprite2D(Vector2 Position, Vector2 Scale, String Directory, String Tag)
 ```
 The position and scale are both vector2's the tag and directory are string's, for the position and scale use something like `new Vector2(10, 10)` for the tag use something that makes sence for the object like `Ground` or `Coin` and the directory is the diectory used to get the actual sprite, to find the directory of the sprite you want go to `Assets\Sprites\PNG` if you don't see the sprite your looking for or the folder the sprite is in the make sure its in the `Assets\Sprites\PNG(directory)` directory to see if it is there.
 

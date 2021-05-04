@@ -8,7 +8,7 @@ Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the pro
 # How To Make A Game
 <details>
   <summary>Click to expand!</summary>
-  ## Pretutorial info
+
 before we start you need to understand some things about the code.                                                                      
 VECTOR2:
 A vector 2 is a float array with two variables `x` and `y` this can be used for the scale and the position of an object.

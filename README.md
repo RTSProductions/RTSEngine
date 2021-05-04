@@ -13,7 +13,7 @@ VECTOR2:
 A vector 2 is a float array with two variables `x` and `y` this can be used for the scale and the position of an object.
 
 LOG:
-Log is a class the can be used to log things to the consel window like this 'Log.Normal("Hello World")' you can also use `Log.Info`, `Log.Warning`, and `Log.Error`.
+Log is a class the can be used to log things to the consel window like this `Log.Normal("Hello World")` you can also use `Log.Info`, `Log.Warning`, and `Log.Error`.
 
 SPRITE2D:
 Sprite2D is a sprite that can be rendered, moved, sacled, destroyed, it can even collide with other sprites and you can also make it a physics object.

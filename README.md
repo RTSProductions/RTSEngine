@@ -8,6 +8,7 @@ Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the pro
 # How To Make A Game
 <details>
   <summary>Click to expand!</summary>
+  ## Pretutorial info
 before we start you need to understand some things about the code.                                                                      
 VECTOR2:
 A vector 2 is a float array with two variables `x` and `y` this can be used for the scale and the position of an object.
@@ -22,6 +23,8 @@ To creat a sprite use:
 Sprite2D sprite = new Sprite2D(Vector2 Position, Vector2 Scale, String Directory, String Tag)
 ```
 The position and scale are both vector2's the tag and directory are string's, for the position and scale use something like `new Vector2(10, 10)` for the tag use something that makes sence for the object like `Ground` or `Coin` and the directory is the diectory used to get the actual sprite, to find the directory of the sprite you want go to `Assets\Sprites\PNG` if you don't see the sprite your looking for or the folder the sprite is in the make sure its in the `Assets\Sprites\PNG(directory)` directory to see if it is there.
+
+## Game Tutorial
 
 first creat a class and call it something like `Game` or `Platformer` or `TopDown` or `Dungeon`
 
@@ -750,3 +753,8 @@ And if you play it we are in a huge map, awesome!
 So thats it now you can make your own games!
 </details>
 
+# How To Add Physics
+<details>
+  <summary>Click to expand!</summary>
+  
+  </details>

@@ -3,6 +3,17 @@
 
 A simple 2D game engine with physics.
 
+# A collapsible section with markdown
+<details>
+  <summary>Click to expand!</summary>
+  
+  ## Heading
+  1. A numbered
+  2. list
+     * With some
+     * Sub bullets
+</details>
+
 
 # Instructions
 Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.

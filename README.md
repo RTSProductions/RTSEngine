@@ -206,18 +206,18 @@ This way we can loop through each character in the array.
 Now we will make it so that the sprites will render.
 Add this in the second for loop :
 ```cs
-                    if (Map[j, i] == "g")
-                    {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
-                    }
-                    if (Map[j, i] == "j")
-                    {
-                        new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), jewelRef, "Jewel");
-                    }
-                    if (Map[j, i] == "c")
-                    {
-                        new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), coinRef, "Coin");
-                    }
+if (Map[j, i] == "g")
+{
+    new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
+}
+if (Map[j, i] == "j")
+{
+    new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), jewelRef, "Jewel");
+}
+if (Map[j, i] == "c")
+{
+    new Sprite2D(new Vector2(i * 50 + 15, j * 50 + 15), new Vector2(25, 25), coinRef, "Coin");
+}
 ```
 Now if we hit play we should see a nice little map for the player to wonder around in.
 So right now our script should look like this:
@@ -338,10 +338,10 @@ In the map array add a `p` for the player like this:
 ```
 Then in the second for loop add another if statment:
 ```cs
-                    if (Map[j, i] == "p")
-                    {
-                        player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), playerRef, "Player");
-                    }
+if (Map[j, i] == "p")
+{
+    player = new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(30, 40), playerRef, "Player");
+}
 ```
 Now if we start we should see a little green blob where you put the `p`.
 But we can't move him, luckly we are reciveing input from the player so all we need to do is use it.

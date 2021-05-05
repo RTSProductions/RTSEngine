@@ -816,9 +816,9 @@ Next we need to add some functions for loading, updating, drawing, and getting i
             
         }
 ```
-Next add a struct and add `: base(new Vector2(615, 515), "RTS Physics Example")` onto it
+Next add a struct and add `: base(new Vector2(515, 515), "RTS Physics Example")` onto it
 ```cs
-        public PhysicsExample() : base(new Vector2(615, 515), "RTS Physics Example")
+        public PhysicsExample() : base(new Vector2(515, 515), "RTS Physics Example")
         {
 
         }
@@ -857,7 +857,7 @@ Then add a string for the map that can be a barrier
 
 now in add some things to the `OnLoad` method
 ```cs
-Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
+            Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
 
             gravity = new Vec2(CurrentGravity.x, CurrentGravity.y);
 
@@ -869,8 +869,8 @@ Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
 ```
 
 Now we need to make the barrier
-``cs
- for (int i = 0; i < Map.GetLength(1); i++)
+```cs
+            for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j < Map.GetLength(0); j++)
                 {
@@ -883,5 +883,160 @@ Now we need to make the barrier
             }
 ```
 
-now lets
+Now lets create a new function for creating the create when its gone
+```cs
+        void CreatBox()
+        {
+            if (box == null)
+            {
+                box = new Sprite2D(new Vector2(225, 0), new Vector2(50, 50), "Crate", "Box");
+
+                box.CreateDynamic();
+            }
+        }
+```
+
+Now in the `OnUpdate` method add some things so the crate will move and so we can destroy it once it hits the barrier and so we can create a new box once the old one is destroyed
+```cs
+           if (box == null)
+            {
+                CreatBox();
+            }
+
+            if (box != null)
+            {
+                box.UpdatePosition();
+
+                if (box.IsColliding("Ground") != null)
+                {
+                    box.DestroySelf();
+
+                    box = null;
+                }
+            }
+```
+Now if you play the game you should see a create falling in the sky, and around when it exits the screen you should see a new one apear.
+
+This is the whole script
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RTSEngine.RTSEngine;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Numerics;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
+using Color = System.Drawing.Color;
+
+namespace RTSEngine
+{
+    class PhysicsExample : RTSEngine.RTSEngine
+    {
+
+        //Physics crate
+        Sprite2D box = null;
+
+        //New gravity
+        Vector2 CurrentGravity = new Vector2(0.0f, 100.0f);
+
+        //the map
+        string[,] Map =
+        {
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
+        };
+
+        public PhysicsExample() : base(new Vector2(515, 515), "RTS Physics Example")
+        {
+
+        }
+
+        public override void GetKeyDown(KeyEventArgs e)
+        {
+
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+
+        }
+
+        public override void OnDraw()
+        {
+
+        }
+
+        public override void OnLoad()
+        {
+            Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
+
+            gravity = new Vec2(CurrentGravity.x, CurrentGravity.y);
+
+            BackroundColor = Color.Aqua;
+
+            box = new Sprite2D(new Vector2(225, 0), new Vector2(50, 50), "Crate", "Box");
+
+            box.CreateDynamic();
+
+            for (int i = 0; i < Map.GetLength(1); i++)
+            {
+                for (int j = 0; j < Map.GetLength(0); j++)
+                {
+                    if (Map[j, i] == "g")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
+                    }
+
+                }
+            }
+        }
+
+        public override void OnUpdate()
+        {
+            if (box == null)
+            {
+                CreatBox();
+            }
+
+            if (box != null)
+            {
+                box.UpdatePosition();
+
+                if (box.IsColliding("Ground") != null)
+                {
+                    box.DestroySelf();
+
+                    box = null;
+                }
+            }
+        }
+        void CreatBox()
+        {
+            if (box == null)
+            {
+                box = new Sprite2D(new Vector2(225, 0), new Vector2(50, 50), "Crate", "Box");
+
+                box.CreateDynamic();
+            }
+        }
+    }
+}
+
+```
+
   </details>

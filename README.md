@@ -128,6 +128,8 @@ And now it should run.
 <details>
   <summary>Click to expand!</summary>
   
+## Info
+
 This project is using [Boc2DNet](https://github.com/codeyu/Box2DNet) a C# port of [Box2D](https://box2d.org/documentation/) for C++
 
 The physics is only for the a `Sprite2D`.

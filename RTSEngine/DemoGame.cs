@@ -20,7 +20,6 @@ namespace RTSEngine
         bool right;
         bool up;
         bool down;
-        bool canFall = true;
         //the last position of the player
         Vector2 lastPos = Vector2.Zero();
         //the speed of the player.
@@ -86,30 +85,23 @@ namespace RTSEngine
             }
         }
 
-        void FallWait()
-        {
-            DateTime t = DateTime.Now;
-            DateTime tf = DateTime.Now.AddSeconds(1);
-
-            while (t < tf)
-            {
-                t = DateTime.Now;
-            }
-            canFall = true;
-        }
-
         //called when each frame is drawn
         public override void OnDraw()
         {
             
         }
 
+
         //onUpdate is called once per frame.
         public override void OnUpdate()
         {
+            //Panning the camera.
+            CameraPosition.x -= .1f;
+
             //checking if the player isn't null.
             if (player != null)
             {
+
                 //moving the player bassed on input
                 if (up)
                 {
@@ -157,7 +149,10 @@ namespace RTSEngine
         //input
         public override void GetKeyDown(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) { up = true; }
+            if (up == false)
+            {
+                if (e.KeyCode == Keys.W && up == false || e.KeyCode == Keys.Up && up == false) { up = true; }
+            }
             if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down) { down = true; }
             if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = true; }
             if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = true; }

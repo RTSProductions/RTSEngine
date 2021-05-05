@@ -762,6 +762,23 @@ So thats it now you can make your own games!
 ## Pretutorial Info
 This project is using [Boc2DNet](https://github.com/codeyu/Box2DNet) a C# port of [Box2D](https://box2d.org/documentation/) for C++
 
+The physics is only for the a `Sprite2D`.
+
+`CreateDynamic()`
+use `CreateDynamic()` to create a dynamic physics object like this:
+```cs
+Sprite2D sprite = new Sprite2D(Position, Scale, Dorectory, Tag);
+
+sprite.CreateDynamic();
+```
+`UpdatePostion()`
+in the `OnUpdate` method use `UpdatePostion()` function to update the position of the physics object based uning the dynamic object's postion.
+```cs
+Sprite2D sprite = new Sprite2D(Position, Scale, Dorectory, Tag);
+
+sprite.UpdatePostion();
+```
+
 ## Physics Tutorial
 Create a new class called `PhyiscsGame` or `FallingCreate` or `Physics`.
 Next add these using tags

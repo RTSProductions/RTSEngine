@@ -760,6 +760,6 @@ So thats it now you can make your own games!
   <summary>Click to expand!</summary>
   
 ## Pretutorial Info
-This project is using [Boc2DNet](https://github.com/codeyu/Box2DNet)
+This project is using [Boc2DNet](https://github.com/codeyu/Box2DNet) a C# port of [Box2D](https://box2d.org/documentation/) for C++
 
   </details>

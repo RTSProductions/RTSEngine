@@ -26,6 +26,101 @@ if (sprite.IsColliding("Ground"))
 }
 ```
 
+## Log
+`Log` is a class with four functions that can be used to log a message to the consel windo
+```cs
+Log.Normal("A Normal Log");
+
+Log.Info("An Info Log");
+
+Log.Warning("A Warning Log");
+
+Log.Error("An Error Log");
+```
+Each log will apear in different colors depending on wich function you use.
+
+## Mathf
+`Mathf` is a class with a few function that can be used with floats.
+
+To intorpolate from 2 numbers use:
+```cs
+float amount = Mathf.Lerp(0, 2, 1) //Mathf.Lerp(float a, float a, float speed)
+```
+
+If you want to clamp a float inbetween two values use:
+```cs
+float value = 100
+
+float amount = Mathf.Clamp(value, -90, 90) // Mathf.Clamp(float inital value, min, max)
+```
+
+## Vector 2
+A `Vector2` can be used for the position or scale of an object.
+```cs
+Vector2 position = new Vector2(10, 100);
+```
+A vector 2 only has to variables `x` and `y` these are both floats that can be edited.
+```cs
+position.x = 30;
+```
+If you want to define a vector 2's x and y variables as zero when you create it instead of using `Vector2 position = new Vector2(0, 0);` you can use:
+```cs
+Vector2 position = Vector2.Zero();
+```
+If you want to move between two points instead of using `Mathf.Lerp()` for x and y you can use:
+```cs
+position = Vector2.Lerp(Vector2.Zero(), new Vector2(10, 10), speed) // Vector2.Lerp(Vector2 a, Vector2 b, float speed)
+```
+
+## Create A Runable Window
+To create a window/game that will actaully run when you
+
+In your class make sure it inherits from the main game engine class:
+```cs
+class Game  : RTSEngine.RTSEngine
+```
+Then add a struct and add ` : base(new Vector2(615, 515), "Game")` so that we get a screen
+```cs
+Public Game()  : base(new Vector2(615, 515), "Game") //A vector 2 for the size of the window and a string for the title of the window
+{
+
+}
+```
+
+Next add some oveides 
+```cs
+       public override void GetKeyDown(KeyEventArgs e)
+        {
+            
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            
+        }
+
+        public override void OnDraw()
+        {
+            
+        }
+
+        public override void OnLoad()
+        {
+            
+        }
+
+        public override void OnUpdate()
+        {
+            
+        }
+```
+Note that you don't need to use all of them but they do need to be there
+Next go to `Program.cs` and add 
+```cs
+Game game = new Game();
+```
+
+And now it should run.
 
   </details>
     

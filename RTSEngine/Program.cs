@@ -11,6 +11,7 @@ namespace RTSEngine
     {
         static void Main(string[] args)
         {
+            //Initalizing the game
             DemoGame game = new DemoGame();
         }
     }

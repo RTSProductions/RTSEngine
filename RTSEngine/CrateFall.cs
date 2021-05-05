@@ -16,10 +16,13 @@ namespace RTSEngine
 {
     class CrateFall : RTSEngine.RTSEngine
     {
+        //Physics crate
         Sprite2D box = null;
 
+        //New gravity
         Vector2 CurrentGravity = new Vector2(0.0f, 100.0f);
 
+        //the map
         string[,] Map =
         {
             {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
@@ -36,7 +39,8 @@ namespace RTSEngine
             {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
         };
 
-        public CrateFall() : base(new Vector2(515, 515), "RTS Engine Demo")
+        //The struct used to make the window
+        public CrateFall() : base(new Vector2(515, 515), "Create Fall")
         {
 
         }
@@ -67,8 +71,6 @@ namespace RTSEngine
             box = new Sprite2D(new Vector2(225, 0), new Vector2(50, 50), "Crate", "Box");
 
             box.CreateDynamic();
-
-            //CameraZoom = new Vector2(0.8f, 0.8f);
 
             for (int i = 0; i < Map.GetLength(1); i++)
             {

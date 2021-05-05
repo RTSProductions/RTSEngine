@@ -34,7 +34,7 @@ namespace RTSEngine.RTSEngine
         }
 
         /// <summary>
-        /// An Information Log.
+        /// A Warning Log.
         /// </summary>
         /// <param name="message"></param>
         public static void Warning(string message)
@@ -43,7 +43,10 @@ namespace RTSEngine.RTSEngine
             Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
-
+        /// <summary>
+        /// An Error Log
+        /// </summary>
+        /// <param name="message"></param>
         public static void Error(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;

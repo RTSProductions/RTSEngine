@@ -113,7 +113,6 @@
   <ItemGroup>
     <Compile Include="CrateFall.cs" />
     <Compile Include="DemoGame.cs" />
-    <Compile Include="ExampleGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RTSEngine\Log.cs" />

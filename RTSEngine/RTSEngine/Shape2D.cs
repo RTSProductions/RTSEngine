@@ -17,6 +17,13 @@ namespace RTSEngine.RTSEngine
         public string Tag = "";
         public Color color;
 
+        /// <summary>
+        /// Used to generate the shape
+        /// </summary>
+        /// <param name="Position"></param>
+        /// <param name="Scale"></param>
+        /// <param name="Tag"></param>
+        /// <param name="color"></param>
         public Shape2D(Vector2 Position, Vector2 Scale, String Tag, Color color)
         {
             this.Position = Position;

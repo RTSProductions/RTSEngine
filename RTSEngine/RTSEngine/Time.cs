@@ -17,6 +17,7 @@ namespace RTSEngine.RTSEngine
            
         }
 
+        //Wait fucntion
         public static void wait(float x)
         {
             DateTime t = DateTime.Now;

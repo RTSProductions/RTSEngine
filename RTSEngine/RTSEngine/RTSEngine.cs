@@ -60,6 +60,11 @@ namespace RTSEngine.RTSEngine
 
         public static World world = null;
 
+        /// <summary>
+        /// Initalizing The window
+        /// </summary>
+        /// <param name="screenSize"></param>
+        /// <param name="title"></param>
         public RTSEngine(Vector2 screenSize, string title)
         {
             Log.Info("Game is starting");
@@ -82,16 +87,19 @@ namespace RTSEngine.RTSEngine
             Application.Run(Window);
         }
 
+        //Ending The Game
         private void Window_FormClosing(object sender, FormClosingEventArgs e)
         {
             GameLoopThread.Abort();
         }
 
+        //Input
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             GetKeyDown(e);
         }
 
+        //Input
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             GetKeyUp(e);

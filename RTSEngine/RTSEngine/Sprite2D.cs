@@ -49,6 +49,13 @@ namespace RTSEngine.RTSEngine
             RTSEngine.RegisterSprite(this);
         }
 
+        public Vector2 GetVelocity()
+        {
+            Vec2 vel = body.GetLinearVelocity();
+            Vector2 get = new Vector2(vel.X, vel.Y);
+            return get;
+        }
+
         public Sprite2D(string Directory)
         {
             this.isReference = true;
@@ -62,6 +69,34 @@ namespace RTSEngine.RTSEngine
 
             Log.Info($"[SPRITE2D]({Tag}) - Has Been registered!");
             RTSEngine.RegisterSprite(this);
+        }
+        /// <summary>
+        /// Creates a static physics objec.
+        /// </summary>
+        public void CreateStatic()
+        {
+            bodyDef = new BodyDef();
+            bodyDef.Position = new Vec2(this.Position.x, this.Position.y);
+
+            body = RTSEngine.world.CreateBody(bodyDef);
+
+            // Define the ground box shape.
+            PolygonDef shapeDef = new PolygonDef();
+
+            // The extents are the half-widths of the box.
+            shapeDef.SetAsBox(Scale.x/2, Scale.y / 2);
+
+            // Add the ground shape to the ground body.
+            body.CreateShape(shapeDef);
+        }
+
+        public void AddForce(Vector2 force, Vector2 point)
+        {
+            body.ApplyImpulse(new Vec2(force.x, force.y), new Vec2(point.x, point.y));
+        }
+        public void SetVelocity(Vector2 vel)
+        {
+            body.SetLinearVelocity(new Vec2(vel.x, vel.y));
         }
 
         public Sprite2D(Vector2 Position, Vector2 Scale, Sprite2D refrence, String Tag)
@@ -92,7 +127,7 @@ namespace RTSEngine.RTSEngine
 
             // Define another box shape for our dynamic body.
             PolygonDef shapeDef = new PolygonDef();
-            shapeDef.SetAsBox(1.0f, 1.0f);
+            shapeDef.SetAsBox(Scale.x / 2, Scale.y / 2);
 
             // Set the box density to be non-zero, so it will be dynamic.
             shapeDef.Density = 1.0f;

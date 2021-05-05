@@ -1,7 +1,35 @@
 # RTS-Engine
 ![](https://img.shields.io/github/repo-size/RTSProductions/RTSEngine?style=for-the-badge)
 
-A simple 2D game engine with physics.
+A simple 2D game engine made in c# with physics.
+
+# General Game Info
+<details>
+  <summary>Click to expand!</summary>
+  
+## Sprites
+A sprite or `Sprite2D` takes 4 arguments
+```cs
+Sprite2D(Vector2 Position, Vector2 Scale, string Directory, String Tag)
+```
+A vector 2 for position, a vector 2 for scale, a string for the directory of the sprite, and a string for the tag.
+DIRECTORY:
+To get the directory of a sprite got to `RTSEngine\RTSEngine\Assets\Sprites\PNG` these are all the avalable sprites, if a sprite isn't in here or a folder wich
+contains sprites isn't here make sure to move it to `RTSEngine\RTSEngine\Assets\Sprites\PNG`
+
+TAG:
+A tag can be used to group many sprites and do things like only colliding with a serten tag
+```cs
+if (sprite.IsColliding("Ground"))
+{
+    //Do something.
+}
+```
+
+
+  </details>
+    
+# General Physics Info
 
 # Instructions
 Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.

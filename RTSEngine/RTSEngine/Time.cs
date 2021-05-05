@@ -28,18 +28,5 @@ namespace RTSEngine.RTSEngine
                 t = DateTime.Now;
             }
         }
-
-        void waitTime(float x)
-        {
-            DateTime t = DateTime.Now;
-            DateTime tf = DateTime.Now.AddSeconds(x);
-
-            while (t < tf)
-            {
-                t = DateTime.Now;
-                time++;
-                Log.Info("The time is " + time);
-            }
-        }
     }
 }

@@ -762,4 +762,126 @@ So thats it now you can make your own games!
 ## Pretutorial Info
 This project is using [Boc2DNet](https://github.com/codeyu/Box2DNet) a C# port of [Box2D](https://box2d.org/documentation/) for C++
 
+## Physics Tutorial
+Create a new class called `PhyiscsGame` or `FallingCreate` or `Physics`.
+Next add these using tags
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RTSEngine.RTSEngine;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Numerics;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
+using Box2DX.Common;
+using Color = System.Drawing.Color;
+```
+
+next add `: RTSEngine.RTSEngine` onto the class file so it inherits for the game engine:
+```cs
+    class PhysicsExample : RTSEngine.RTSEngine
+    {
+
+    }
+```
+
+Next we need to add some functions for loading, updating, drawing, and getting input:
+```cs
+        public override void GetKeyDown(KeyEventArgs e)
+        {
+            
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            
+        }
+
+        public override void OnDraw()
+        {
+            
+        }
+
+        public override void OnLoad()
+        {
+            
+        }
+
+        public override void OnUpdate()
+        {
+            
+        }
+```
+Next add a struct and add `: base(new Vector2(615, 515), "RTS Physics Example")` onto it
+```cs
+        public PhysicsExample() : base(new Vector2(615, 515), "RTS Physics Example")
+        {
+
+        }
+```
+
+Now go into the `Program.cs` file and replace what ever game your running with `PhysicsExample game = new PhysicsExample()`
+
+Now add some variables
+```cs
+        //Physics crate
+        Sprite2D box = null;
+
+        //New gravity
+        Vector2 CurrentGravity = new Vector2(0.0f, 100.0f);
+```
+
+Then add a string for the map that can be a barrier
+```cs
+        //the map
+        string[,] Map =
+        {
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {"g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"},
+        };
+```
+
+now in add some things to the `OnLoad` method
+```cs
+Sprite2D groundRef = new Sprite2D("Tiles/Blue tiles/tileBlue_03");
+
+            gravity = new Vec2(CurrentGravity.x, CurrentGravity.y);
+
+            BackroundColor = Color.Aqua;
+
+            box = new Sprite2D(new Vector2(225, 0), new Vector2(50, 50), "Crate", "Box");
+
+            box.CreateDynamic();
+```
+
+Now we need to make the barrier
+``cs
+ for (int i = 0; i < Map.GetLength(1); i++)
+            {
+                for (int j = 0; j < Map.GetLength(0); j++)
+                {
+                    if (Map[j, i] == "g")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), groundRef, "Ground");
+                    }
+
+                }
+            }
+```
+
+now lets
   </details>

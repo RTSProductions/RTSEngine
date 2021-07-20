@@ -14,11 +14,11 @@ Sprite2D(Vector2 Position, Vector2 Scale, string Directory, String Tag)
 ```
 A vector 2 for position, a vector 2 for scale, a string for the directory of the sprite, and a string for the tag.
 DIRECTORY:
-To get the directory of a sprite got to `RTSEngine\RTSEngine\Assets\Sprites\PNG` these are all the avalable sprites, if a sprite isn't in here or a folder wich
+To get the directory of a sprite got to `RTSEngine\RTSEngine\Assets\Sprites\PNG` these are all the avalible sprites, if a sprite isn't in here or a folder which
 contains sprites isn't here make sure to move it to `RTSEngine\RTSEngine\Assets\Sprites\PNG`
 
 TAG:
-A tag can be used to group many sprites and do things like only colliding with a serten tag
+A tag can be used to group many sprites and do things like only colliding with a certain tag
 ```cs
 if (sprite.IsColliding("Ground"))
 {
@@ -27,7 +27,7 @@ if (sprite.IsColliding("Ground"))
 ```
 
 ## Log
-`Log` is a class with four functions that can be used to log a message to the consel windo
+`Log` is a class with four functions that can be used to log a message to the console window
 ```cs
 Log.Normal("A Normal Log");
 
@@ -37,21 +37,21 @@ Log.Warning("A Warning Log");
 
 Log.Error("An Error Log");
 ```
-Each log will apear in different colors depending on wich function you use.
+Each log will appear in different colors depending on which function you use.
 
 ## Mathf
 `Mathf` is a class with a few function that can be used with floats.
 
-To intorpolate from 2 numbers use:
+To interpolate from 2 numbers use:
 ```cs
-float amount = Mathf.Lerp(0, 2, 1) //Mathf.Lerp(float a, float a, float speed)
+float amount = Mathf.Lerp(0, 2, 1) //Mathf.Lerp(float a, float b, float speed)
 ```
 
-If you want to clamp a float inbetween two values use:
+If you want to clamp a float in between two values use:
 ```cs
 float value = 100
 
-float amount = Mathf.Clamp(value, -90, 90) // Mathf.Clamp(float inital value, min, max)
+float amount = Mathf.Clamp(value, -90, 90) // Mathf.Clamp(float initial value, min, max)
 ```
 
 ## Vector 2
@@ -73,7 +73,7 @@ position = Vector2.Lerp(Vector2.Zero(), new Vector2(10, 10), speed) // Vector2.L
 ```
 
 ## Create A Runable Window
-To create a window/game that will actaully run when you
+To create a window/game that will actually run when you
 
 In your class make sure it inherits from the main game engine class:
 ```cs
@@ -143,14 +143,14 @@ sprite.CreateDynamic();
 ```
 
 ## `UpdatePostion()`
-in the `OnUpdate` method use `UpdatePostion()` function to update the position of the physics object based uning the dynamic object's postion.
+in the `OnUpdate` method use `UpdatePostion()` function to update the position of the physics object based uning the dynamic object's position.
 ```cs
 sprite.UpdatePostion();
 ```
   </details>
 
 # Instructions
-Open the RTSEngine folder and doubble click on the RTSEngine.sln to open the project and use it.
+Open the RTSEngine folder and double click on the RTSEngine.sln to open the project and use it.
 # How To Make A Game
 <details>
   <summary>Click to expand!</summary>
@@ -162,7 +162,7 @@ VECTOR2:
 A vector 2 is a float array with two variables `x` and `y` this can be used for the scale and the position of an object.
 
 LOG:
-Log is a class the can be used to log things to the consel window like this `Log.Normal("Hello World")` you can also use `Log.Info`, `Log.Warning`, and `Log.Error`.
+Log is a class the can be used to log things to the console window like this `Log.Normal("Hello World")` you can also use `Log.Info`, `Log.Warning`, and `Log.Error`.
 
 SPRITE2D:
 Sprite2D is a sprite that can be rendered, moved, sacled, destroyed, it can even collide with other sprites and you can also make it a physics object.
@@ -246,10 +246,10 @@ namespace RTSEngine
     }
 }
 ```
-This will allow us to actaully play our game, but don't try it yet because we still have nothing
+This will allow us to actually play our game, but don't try it yet because we still have nothing
 Now you should be getting an error on the class. Don't worry were about to fix that.
 
-Add some overide voids
+Add some override voids
 ```cs
         public override void GetKeyDown(KeyEventArgs e)
         {
@@ -317,9 +317,9 @@ And in the `GetKeyUp` mothod add :
             if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) { left = false; }
             if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) { right = false; }
 ```
-So now we are getting input from the player wich we can use to move.
+So now we are getting input from the player which we can use to move.
 
-Now in oder to make the player and the map we make a 2 dimentinal string array or `string[,] Map` then in the array us the `.` character for an empty space and use the `g` for a ground space also add the `j` for a jewel and `c` for a coin.
+Now in oder to make the player and the map we make a 2 diminutional string array or `string[,] Map` then in the array us the `.` character for an empty space and use the `g` for a ground space also add the `j` for a jewel and `c` for a coin.
 Like this:
 ```cs
         string[,] Map =
@@ -334,7 +334,7 @@ Like this:
         };
 ```
 This will be our map.
-Now in the `OnLoad` method add three sprites that we can use for all the other spites to load in oder to make it more preforment and make it load faster. Also add change the backround color (optinal)
+Now in the `OnLoad` method add three sprites that we can use for all the other spites to load in oder to make it more preferment and make it load faster. Also add change the background color (optional)
 ```cs
             BackroundColor = Color.Black;
 
@@ -343,7 +343,7 @@ Now in the `OnLoad` method add three sprites that we can use for all the other s
             Sprite2D jewelRef = new Sprite2D("Items/yellowJewel");
             Sprite2D coinRef = new Sprite2D("Items/yellowCrystal");
 ```
-Back in the `OnLoad` method creat two for loops like this:
+Back in the `OnLoad` method create two for loops like this:
 ```cs
            for (int i = 0; i < Map.GetLength(1); i++)
            {
@@ -487,7 +487,7 @@ In the map array add a `p` for the player like this:
             {"g","g","g","g","g","g","g"},
         };
 ```
-Then in the second for loop add another if statment:
+Then in the second for loop add another if statement:
 ```cs
 if (Map[j, i] == "p")
 {
@@ -495,7 +495,7 @@ if (Map[j, i] == "p")
 }
 ```
 Now if we start we should see a little green blob where you put the `p`.
-But we can't move him, luckly we are reciveing input from the player so all we need to do is use it.
+But we can't move him, luckily we are receiving input from the player so all we need to do is use it.
 So in the `OnUpdate` method add:
 ```cs
             if (player != null)
@@ -504,7 +504,7 @@ So in the `OnUpdate` method add:
             }
 ```
 Now we can use the input bools.
-First add the y axsis like this:
+First add the y axis like this:
 ```cs
                 if (up)
                 {
@@ -515,7 +515,7 @@ First add the y axsis like this:
                     player.Position.y += speed;
                 }
 ```
-Now add the x axsis:
+Now add the x axis:
 ```cs
                 if (left)
                 {
@@ -528,7 +528,7 @@ Now add the x axsis:
 ```
 Now if we start the game we have a little green player that can move round, fun!
 But it wont collide with the walls.
-So we need to make it registor the collsion, luckly the `Sprite2D` does all the work for us.
+So we need to make it register the collision, luckily the `Sprite2D` does all the work for us.
 So next lets add this:
 ```cs
                 if (player.IsColliding("Ground") != null)
@@ -536,13 +536,13 @@ So next lets add this:
 
                 }
 ```
-In the collide statment add:
+In the collide statement add:
 ```cs
                     player.Position.x = lastPos.x;
                     player.Position.y = lastPos.y;
 ```
 This checks if were colliding with the walls and if so makes it so we can't move through the walls!
-Now add an else statment so we can update the lasp position of the player:
+Now add an else statement so we can update the last position of the player:
 ```cs
                 else
                 {
@@ -918,7 +918,7 @@ Sprite2D sprite = new Sprite2D(Position, Scale, Directory, Tag);
 sprite.CreateDynamic();
 ```
 `UpdatePostion()`
-in the `OnUpdate` method use `UpdatePostion()` function to update the position of the physics object based uning the dynamic object's postion.
+in the `OnUpdate` method use `UpdatePostion()` function to update the position of the physics object based uning the dynamic object's position.
 ```cs
 Sprite2D sprite = new Sprite2D(Position, Scale, Directory, Tag);
 
@@ -1078,7 +1078,7 @@ Now in the `OnUpdate` method add some things so the crate will move and so we ca
                 }
             }
 ```
-Now if you play the game you should see a create falling in the sky, and around when it exits the screen you should see a new one apear.
+Now if you play the game you should see a create falling in the sky, and around when it exits the screen you should see a new one appear.
 
 This is the whole script
 ```cs

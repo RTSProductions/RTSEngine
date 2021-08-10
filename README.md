@@ -1,5 +1,4 @@
 # RTSEngine
-![](https://img.shields.io/github/repo-size/RTSProductions/RTSEngine?style=for-the-badge)
 
 A simple 2D game engine made in c# with physics.
 

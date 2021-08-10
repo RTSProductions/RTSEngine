@@ -2,6 +2,8 @@
 
 A simple 2D game engine made in c# with physics.
 
+![](https://img.shields.io/github/repo-size/RTSProductions/RTSEngine?style=for-the-badge)
+
 # General Game Info
 <details>
   <summary>Click to expand!</summary>
